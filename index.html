@@ -13,24 +13,36 @@
   <link rel="apple-touch-icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
   <meta name="theme-color" content="#111827" />
 
+  <!-- ✅ Manifest (auto inlined for PWA install) -->
+  <link rel="manifest" href="data:application/manifest+json,{
+    &quot;name&quot;:&quot;Live Trading Junction Journal&quot;,
+    &quot;short_name&quot;:&quot;LTJ Journal&quot;,
+    &quot;start_url&quot;:&quot;/Live-trading-Junction-Journal/&quot;,
+    &quot;display&quot;:&quot;standalone&quot;,
+    &quot;background_color&quot;:&quot;#111827&quot;,
+    &quot;theme_color&quot;:&quot;#111827&quot;,
+    &quot;description&quot;:&quot;Real-time Trade Journal for Nifty, Banknifty, BTC & Gold. Track performance like a pro.&quot;,
+    &quot;icons&quot;:[
+      {&quot;src&quot;:&quot;https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/x-icon&quot;},
+      {&quot;src&quot;:&quot;https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/x-icon&quot;}
+    ]
+  }">
+
   <!-- ✅ SEO Meta -->
-  <meta
-    name="description"
-    content="📊 Live Trading Junction Journal — Real-time Trading Tracker for Nifty, Banknifty, Gold, BTC & Crypto. Smart Analytics. Discipline-Based PnL Insights."
-  />
-  <meta
-    name="keywords"
-    content="Live Trading Journal, Nifty Tracker, Banknifty Journal, BTC Gold Calculator, Crypto Trades, Live PnL Tracker, Trader Discipline App"
-  />
+  <meta name="description" content="📊 Live Trading Junction Journal — Real-time Trading Tracker for Nifty, Banknifty, Gold, BTC & Crypto." />
+  <meta name="keywords" content="Live Trading Journal, Nifty Tracker, Banknifty Journal, BTC Gold Calculator, Crypto Trades, Live PnL Tracker, Trader Discipline App" />
   <meta name="author" content="LiveTradingJunction-Cyber" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Live Trading Junction Journal 💹" />
+  <meta property="og:description" content="Real-time Trade Analytics • Smart Reports • Live PnL Tracking • Built for Pro Traders 🚀" />
+  <meta property="og:url" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/" />
+  <meta property="og:image" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/meta-preview.png" />
 
   <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    function gtag(){dataLayer.push(arguments);}
     gtag("js", new Date());
     gtag("config", "G-L1VHQ9XSFQ");
   </script>
@@ -46,7 +58,7 @@
     /* 💚 View-Only Mode Blinking Badge */
     .viewOnlyBadge {
       position: fixed;
-      bottom: 130px; /* moved up for better visibility */
+      bottom: 130px; /* above taskbar */
       left: 50%;
       transform: translateX(-50%);
       background: linear-gradient(90deg, #16a34a, #22c55e);
@@ -62,34 +74,17 @@
       font-size: 15px;
       z-index: 10000;
     }
-
-    .viewOnlyBadge::before {
-      content: "🔒";
-      font-size: 18px;
-    }
-
+    .viewOnlyBadge::before { content: "🔒"; font-size: 18px; }
     @keyframes pulseGlow {
-      0% {
-        transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 25px rgba(22, 163, 74, 0.5);
-        opacity: 1;
-      }
-      50% {
-        transform: translateX(-50%) scale(1.05);
-        box-shadow: 0 0 40px rgba(22, 163, 74, 0.8);
-        opacity: 0.85;
-      }
-      100% {
-        transform: translateX(-50%) scale(1);
-        box-shadow: 0 0 25px rgba(22, 163, 74, 0.5);
-        opacity: 1;
-      }
+      0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 25px rgba(22,163,74,0.5); opacity: 1; }
+      50% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 40px rgba(22,163,74,0.8); opacity: 0.85; }
+      100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 25px rgba(22,163,74,0.5); opacity: 1; }
     }
 
     /* 🔴 Back To Journal Button */
     .backToJournal {
       position: fixed;
-      bottom: 55px; /* moved up a bit */
+      bottom: 55px;
       left: 50%;
       transform: translateX(-50%);
       background: linear-gradient(90deg, #ef4444, #b91c1c);
@@ -103,21 +98,15 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
       transition: transform 0.25s ease;
     }
+    .backToJournal:hover { transform: translateX(-50%) scale(1.07); }
 
-    .backToJournal:hover {
-      transform: translateX(-50%) scale(1.07);
-    }
-
-    /* Disable Inputs for View-Only Mode */
-    .viewOnlyDim {
-      pointer-events: none !important;
-      opacity: 0.6 !important;
-    }
+    /* Locking system for View-Only */
+    .viewOnlyDim { pointer-events: none !important; opacity: 0.6 !important; }
   </style>
 </head>
 
 <body>
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -6012,37 +6001,65 @@ window.onload = () => {
 </script>
 </body>
 </html>
-  <!-- 💚 Blinking View-Only Mode Badge -->
+  <!-- 💚 View-Only Badge -->
   <div class="viewOnlyBadge">View-Only Mode Enabled — Editing Locked</div>
 
-  <!-- 🔴 Back To Journal Button -->
-  <button
-    class="backToJournal"
-    data-allow="true"
-    onclick="window.location.href='https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/'"
-  >
+  <!-- 🔴 Back Button -->
+  <button class="backToJournal" data-allow="true"
+    onclick="window.location.href='https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/'">
     ⬅ Back To Journal
   </button>
 
+  <!-- View-only lock + Service Worker -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const lockedTags = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
-      const lockedEls = document.querySelectorAll(lockedTags.join(","));
-      lockedEls.forEach((el) => {
+      const lockedTags = ["INPUT","TEXTAREA","SELECT","BUTTON"];
+      document.querySelectorAll(lockedTags.join(",")).forEach(el => {
         if (el.getAttribute("data-allow") === "true") return;
-        el.disabled = true;
-        el.classList.add("viewOnlyDim");
+        el.disabled = true; el.classList.add("viewOnlyDim");
       });
-
-      const anchors = document.querySelectorAll("a");
-      anchors.forEach((a) => {
+      document.querySelectorAll("a").forEach(a => {
         if (a.getAttribute("data-allow") === "true") return;
         a.classList.add("viewOnlyDim");
-        a.addEventListener("click", (e) => e.preventDefault());
+        a.addEventListener("click", e => e.preventDefault());
       });
-
-      console.log("✅ View-only mode active. Inputs locked except Back To Journal.");
+      console.log("✅ View-only mode active.");
     });
+
+    // ------- Inline PWA Service Worker -------
+    const swCode = `
+      const CACHE_NAME = 'ltj-cache-v1';
+      const BASE = '/Live-trading-Junction-Journal/';
+      const PRECACHE = [BASE, BASE + 'index.html', BASE + 'favicon.ico'];
+      self.addEventListener('install', e => {
+        e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(PRECACHE)));
+        self.skipWaiting();
+      });
+      self.addEventListener('activate', e => {
+        e.waitUntil(caches.keys().then(keys => Promise.all(keys.map(k => k === CACHE_NAME ? null : caches.delete(k)))));
+        self.clients.claim();
+      });
+      self.addEventListener('fetch', e => {
+        const req = e.request;
+        const html = req.headers.get('accept')?.includes('text/html');
+        if (html) {
+          e.respondWith(
+            fetch(req).then(res => {
+              const copy = res.clone();
+              caches.open(CACHE_NAME).then(c => c.put(req, copy));
+              return res;
+            }).catch(() => caches.match(req))
+          );
+        } else {
+          e.respondWith(caches.match(req).then(r => r || fetch(req)));
+        }
+      });
+    `;
+    if ('serviceWorker' in navigator) {
+      const blob = new Blob([swCode], { type: "text/javascript" });
+      const swURL = URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swURL).then(() => console.log("✅ PWA Ready!"));
+    }
   </script>
 </body>
 </html>
