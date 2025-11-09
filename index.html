@@ -1,53 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Live Trading Junction Journal</title>
 
   <!-- ✅ Google Verification -->
   <meta name="google-site-verification" content="iarkQywYkFLaL6gvIPgngYWjFFN8u-QZjH87QpdezZk" />
 
   <!-- ✅ Favicon -->
-  <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico">
-  <link rel="apple-touch-icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico">
-  <meta name="theme-color" content="#111827">
+  <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
+  <meta name="theme-color" content="#111827" />
 
   <!-- ✅ SEO Meta -->
-  <meta name="description" content="📊 Live Trading Junction Journal — Real-time Trading Tracker for Nifty, Banknifty, Gold, BTC & Crypto. Smart Analytics. Discipline-Based PnL Insights.">
-  <meta name="keywords" content="Live Trading Journal, Nifty Tracker, Banknifty Journal, BTC Gold Calculator, Crypto Trades, Live PnL Tracker, Trader Discipline App">
-  <meta name="author" content="LiveTradingJunction-Cyber">
-
-  <!-- ✅ Social Media Preview -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Live Trading Junction Journal 💹">
-  <meta property="og:description" content="Real-time Trade Analytics • Smart Reports • Live PnL Tracking • Built for Pro Traders 🚀">
-  <meta property="og:url" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/">
-  <meta property="og:image" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/meta-preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- ✅ Twitter / Telegram Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Live Trading Junction Journal 💹">
-  <meta name="twitter:description" content="Smart Trade Journal | Live Analytics | Auto PnL | Discipline Tracking 📈">
-  <meta name="twitter:image" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/meta-preview.png">
+  <meta
+    name="description"
+    content="📊 Live Trading Junction Journal — Real-time Trading Tracker for Nifty, Banknifty, Gold, BTC & Crypto. Smart Analytics. Discipline-Based PnL Insights."
+  />
+  <meta
+    name="keywords"
+    content="Live Trading Journal, Nifty Tracker, Banknifty Journal, BTC Gold Calculator, Crypto Trades, Live PnL Tracker, Trader Discipline App"
+  />
+  <meta name="author" content="LiveTradingJunction-Cyber" />
 
   <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-L1VHQ9XSFQ');
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-L1VHQ9XSFQ");
   </script>
 
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
       background: #f9fafb;
       overflow-x: hidden;
+    }
+
+    /* 💚 View-Only Mode Blinking Badge */
+    .viewOnlyBadge {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #16a34a, #22c55e);
+      color: white;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 30px;
+      box-shadow: 0 0 25px rgba(22, 163, 74, 0.5);
+      animation: pulseGlow 2.5s infinite ease-in-out;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      z-index: 10000;
+    }
+
+    .viewOnlyBadge::before {
+      content: "🔒";
+      font-size: 18px;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 25px rgba(22, 163, 74, 0.5);
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(-50%) scale(1.05);
+        box-shadow: 0 0 40px rgba(22, 163, 74, 0.8);
+        opacity: 0.85;
+      }
+      100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 25px rgba(22, 163, 74, 0.5);
+        opacity: 1;
+      }
     }
 
     /* 🔴 Back To Journal Button */
@@ -60,41 +96,16 @@
       color: #fff;
       border: none;
       font-weight: 600;
-      padding: 12px 24px;
+      padding: 12px 26px;
       border-radius: 12px;
       cursor: pointer;
       z-index: 9999;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
       transition: transform 0.25s ease;
     }
 
     .backToJournal:hover {
       transform: translateX(-50%) scale(1.07);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, 20px); }
-      to { opacity: 1; transform: translate(-50%, 0); }
-    }
-
-    /* ✅ View-Only Mode Enabled Button (Green) */
-    .viewOnlyBanner {
-      position: fixed;
-      bottom: 90px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, #22c55e, #16a34a);
-      color: #fff;
-      font-weight: 600;
-      font-size: 15px;
-      border: none;
-      padding: 12px 32px;
-      border-radius: 20px;
-      z-index: 9998;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 1s ease forwards;
     }
 
     /* Disable Inputs for View-Only Mode */
@@ -106,7 +117,6 @@
 </head>
 
 <body>
-
   <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6003,32 +6013,33 @@ window.onload = () => {
 </body>
 </html>
 
-  <!-- ✅ View-Only Banner -->
-  <div class="viewOnlyBanner">
-    🔒 View-Only Mode Enabled — Editing Locked
-  </div>
+  <!-- 💚 Blinking View-Only Mode Badge -->
+  <div class="viewOnlyBadge">View-Only Mode Enabled — Editing Locked</div>
 
-  <!-- ✅ Floating Centered Back To Journal Button -->
-  <button class="backToJournal" data-allow="true" onclick="window.location.href='https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/'">
+  <!-- 🔴 Back To Journal Button -->
+  <button
+    class="backToJournal"
+    data-allow="true"
+    onclick="window.location.href='https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/'"
+  >
     ⬅ Back To Journal
   </button>
 
-  <!-- ======= View-Only Lock Script ======= -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const lockedTags = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
       const lockedEls = document.querySelectorAll(lockedTags.join(","));
-      lockedEls.forEach(el => {
+      lockedEls.forEach((el) => {
         if (el.getAttribute("data-allow") === "true") return;
         el.disabled = true;
         el.classList.add("viewOnlyDim");
       });
 
       const anchors = document.querySelectorAll("a");
-      anchors.forEach(a => {
+      anchors.forEach((a) => {
         if (a.getAttribute("data-allow") === "true") return;
         a.classList.add("viewOnlyDim");
-        a.addEventListener("click", e => e.preventDefault());
+        a.addEventListener("click", (e) => e.preventDefault());
       });
 
       console.log("✅ View-only mode active. Inputs locked except Back To Journal.");
