@@ -48,12 +48,32 @@
       font-family: 'Poppins', sans-serif;
       background: #f9fafb;
     }
+    .backToJournal {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(90deg,#0ea5e9,#0369a1);
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease-in-out;
+    }
+    .backToJournal:hover { transform: scale(1.05); }
+    .viewOnlyDim {
+      pointer-events: none !important;
+      opacity: 0.6 !important;
+    }
   </style>
 </head>
 
 <body>
 
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -5948,7 +5968,8 @@ window.onload = () => {
 </script>
 </body>
 </html>
-  <!-- Example placeholder (remove this and paste your real journal layout) -->
+
+  <!-- Example Placeholder -->
   <div class="container">
     <h1>📊 Live Trading Junction Journal</h1>
     <p>Gold, BTC, and Nifty levels appear here.</p>
@@ -5956,38 +5977,10 @@ window.onload = () => {
     <button>Save</button>
   </div>
 
+  <!-- Floating Back To Journal button -->
+  <button class="backToJournal" data-allow="true" onclick="window.location.href='https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/'">⬅ Back To Journal</button>
+
   <!-- ======= View-Only Lock Script (Paste before </body>) ======= -->
-  <style>
-    #viewOnlyBanner {
-      position: fixed;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, #ffb300, #ff6b00);
-      color: #111;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 40px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-      z-index: 9999;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, 30px); }
-      to { opacity: 1; transform: translate(-50%, 0); }
-    }
-
-    .viewOnlyDim {
-      pointer-events: none !important;
-      opacity: 0.6 !important;
-    }
-  </style>
-
-  <div id="viewOnlyBanner">
-    🔒 View-Only Mode Enabled — Editing Locked
-  </div>
-
   <script>
     // Disable all form elements except those with data-allow="true"
     document.addEventListener("DOMContentLoaded", function () {
@@ -6007,7 +6000,7 @@ window.onload = () => {
         a.addEventListener("click", e => e.preventDefault());
       });
 
-      console.log("✅ View-only mode active. All inputs/buttons locked.");
+      console.log("✅ View-only mode active. All inputs/buttons locked except Back To Journal.");
     });
   </script>
   <!-- ======= End View-Only Lock Script ======= -->
