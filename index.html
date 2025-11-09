@@ -13,11 +13,12 @@
   <link rel="apple-touch-icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
   <meta name="theme-color" content="#111827" />
 
-  <!-- ✅ Manifest (auto inlined for PWA install) -->
+  <!-- ✅ Manifest (inline JSON for PWA) -->
   <link rel="manifest" href="data:application/manifest+json,{
     &quot;name&quot;:&quot;Live Trading Junction Journal&quot;,
     &quot;short_name&quot;:&quot;LTJ Journal&quot;,
     &quot;start_url&quot;:&quot;/Live-trading-Junction-Journal/&quot;,
+    &quot;scope&quot;:&quot;/Live-trading-Junction-Journal/&quot;,
     &quot;display&quot;:&quot;standalone&quot;,
     &quot;background_color&quot;:&quot;#111827&quot;,
     &quot;theme_color&quot;:&quot;#111827&quot;,
@@ -29,7 +30,7 @@
   }">
 
   <!-- ✅ SEO Meta -->
-  <meta name="description" content="📊 Live Trading Junction Journal — Real-time Trading Tracker for Nifty, Banknifty, Gold, BTC & Crypto." />
+  <meta name="description" content="📊 Live Trading Junction Journal — Real-time Trading Tracker for Nifty, Banknifty, Gold, BTC & Crypto. Smart Analytics. Discipline-Based PnL Insights." />
   <meta name="keywords" content="Live Trading Journal, Nifty Tracker, Banknifty Journal, BTC Gold Calculator, Crypto Trades, Live PnL Tracker, Trader Discipline App" />
   <meta name="author" content="LiveTradingJunction-Cyber" />
   <meta property="og:type" content="website" />
@@ -100,13 +101,12 @@
     }
     .backToJournal:hover { transform: translateX(-50%) scale(1.07); }
 
-    /* Locking system for View-Only */
     .viewOnlyDim { pointer-events: none !important; opacity: 0.6 !important; }
   </style>
 </head>
 
 <body>
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -6001,17 +6001,16 @@ window.onload = () => {
 </script>
 </body>
 </html>
-  <!-- 💚 View-Only Badge -->
+
   <div class="viewOnlyBadge">View-Only Mode Enabled — Editing Locked</div>
 
-  <!-- 🔴 Back Button -->
   <button class="backToJournal" data-allow="true"
     onclick="window.location.href='https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/'">
     ⬅ Back To Journal
   </button>
 
-  <!-- View-only lock + Service Worker -->
   <script>
+    // View-only lock system
     document.addEventListener("DOMContentLoaded", function () {
       const lockedTags = ["INPUT","TEXTAREA","SELECT","BUTTON"];
       document.querySelectorAll(lockedTags.join(",")).forEach(el => {
@@ -6026,7 +6025,7 @@ window.onload = () => {
       console.log("✅ View-only mode active.");
     });
 
-    // ------- Inline PWA Service Worker -------
+    // Inline PWA Service Worker
     const swCode = `
       const CACHE_NAME = 'ltj-cache-v1';
       const BASE = '/Live-trading-Junction-Journal/';
@@ -6058,7 +6057,9 @@ window.onload = () => {
     if ('serviceWorker' in navigator) {
       const blob = new Blob([swCode], { type: "text/javascript" });
       const swURL = URL.createObjectURL(blob);
-      navigator.serviceWorker.register(swURL).then(() => console.log("✅ PWA Ready!"));
+      navigator.serviceWorker.register(swURL)
+        .then(() => console.log("✅ PWA Ready — App can be installed"))
+        .catch(err => console.log("❌ SW Registration failed:", err));
     }
   </script>
 </body>
