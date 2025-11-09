@@ -37,7 +37,7 @@
 </head>
 
 <body>
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -5932,5 +5932,80 @@ window.onload = () => {
 </script>
 </body>
 </html>
+
+
+  <!-- ✅ Centered Live Visitor Button + Footer Branding -->
+
+  <!-- 🔹 Live Visitor Button -->
+  <div id="live-visitor-box" style="
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    padding: 12px 28px;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    z-index: 9999;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  ">
+    👁️ <span id="visitor-count">0</span> Active Visitors
+  </div>
+
+  <script>
+    // ✅ Animated Live Visitor Counter Simulation
+    // (Randomized until GA Realtime API integration)
+    let count = Math.floor(Math.random() * 5) + 1;
+    const visitorBox = document.getElementById("visitor-count");
+
+    function updateCount() {
+      count = Math.floor(Math.random() * 6) + 1;
+      visitorBox.textContent = count;
+    }
+
+    // Update every 8 seconds
+    setInterval(updateCount, 8000);
+    visitorBox.textContent = count;
+
+    // Hover animation for button effect
+    const btn = document.getElementById("live-visitor-box");
+    btn.addEventListener("mouseover", () => {
+      btn.style.transform = "translateX(-50%) scale(1.05)";
+      btn.style.boxShadow = "0 10px 30px rgba(0,0,0,0.3)";
+    });
+    btn.addEventListener("mouseout", () => {
+      btn.style.transform = "translateX(-50%) scale(1)";
+      btn.style.boxShadow = "0 8px 25px rgba(0,0,0,0.25)";
+    });
+  </script>
+
+  <!-- 🔹 Footer Branding -->
+  <footer style="
+    text-align: center;
+    margin-top: 80px;
+    padding: 25px 0;
+    background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    border-top: 2px solid rgba(255,255,255,0.2);
+  ">
+    <h3>💻 Tech Stack</h3>
+    <p>HTML5 + Tailwind CSS + JavaScript | Google Analytics 4 | GitHub Pages Hosting</p>
+    <p style="margin-top:8px; font-size:14px; color:#e0e7ff;">
+      © 2025 <b>LiveTradingJunction-Cyber</b> — Built with 💙 for Traders & Analysts
+    </p>
+  </footer>
+  <!-- ✅ End of Live Counter + Footer Branding -->
 </body>
 </html>
