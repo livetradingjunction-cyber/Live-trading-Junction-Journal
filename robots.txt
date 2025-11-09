@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/sitemap.xml
