@@ -9,7 +9,29 @@
   <meta name="google-site-verification" content="iarkQywYkFLaL6gvIPgngYWjFFN8u-QZjH87QpdezZk" />
 
   <!-- ✅ Favicon -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico">
+  <link rel="apple-touch-icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico">
+  <meta name="theme-color" content="#111827">
+
+  <!-- ✅ SEO Meta -->
+  <meta name="description" content="📊 Live Trading Junction Journal — Real-time Trading Tracker for Nifty, Banknifty, Gold, BTC & Crypto. Smart Analytics. Discipline-Based PnL Insights.">
+  <meta name="keywords" content="Live Trading Journal, Nifty Tracker, Banknifty Journal, BTC Gold Calculator, Crypto Trades, Live PnL Tracker, Trader Discipline App">
+  <meta name="author" content="LiveTradingJunction-Cyber">
+
+  <!-- ✅ Social Media Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Live Trading Junction Journal 💹">
+  <meta property="og:description" content="Real-time Trade Analytics • Smart Reports • Live PnL Tracking • Built for Pro Traders 🚀">
+  <meta property="og:url" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/">
+  <meta property="og:image" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/meta-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- ✅ Twitter / Telegram Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Live Trading Junction Journal 💹">
+  <meta name="twitter:description" content="Smart Trade Journal | Live Analytics | Auto PnL | Discipline Tracking 📈">
+  <meta name="twitter:image" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/meta-preview.png">
 
   <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
@@ -21,49 +43,17 @@
   </script>
 
   <style>
-    /* 🧩 Common Button Design */
-    .visitor-btn {
-      position: fixed;
-      bottom: 25px;
-      color: #1a1a1a;
+    body {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
-      padding: 12px 26px;
-      border-radius: 50px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-      z-index: 9999;
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
-      transition: all 0.3s ease-in-out;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    /* Left: Active Visitors */
-    #live-visitor-box {
-      left: 25px;
-      background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
-    }
-
-    /* Right: Total Visitors */
-    #total-visitor-box {
-      right: 25px;
-      background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-    }
-
-    .visitor-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      background: #f9fafb;
     }
   </style>
 </head>
 
 <body>
 
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -5958,51 +5948,69 @@ window.onload = () => {
 </script>
 </body>
 </html>
-  <!-- 👁️ Active Visitors Button -->
-  <div id="live-visitor-box" class="visitor-btn">
-    👁️ Active: <span id="active-count">0</span>
+  <!-- Example placeholder (remove this and paste your real journal layout) -->
+  <div class="container">
+    <h1>📊 Live Trading Junction Journal</h1>
+    <p>Gold, BTC, and Nifty levels appear here.</p>
+    <input type="text" placeholder="Enter Level" />
+    <button>Save</button>
   </div>
 
-  <!-- 🌍 Total Visitors Button -->
-  <div id="total-visitor-box" class="visitor-btn">
-    🌍 Total: <span id="total-count">0</span>
+  <!-- ======= View-Only Lock Script (Paste before </body>) ======= -->
+  <style>
+    #viewOnlyBanner {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #ffb300, #ff6b00);
+      color: #111;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 40px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      z-index: 9999;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, 30px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .viewOnlyDim {
+      pointer-events: none !important;
+      opacity: 0.6 !important;
+    }
+  </style>
+
+  <div id="viewOnlyBanner">
+    🔒 View-Only Mode Enabled — Editing Locked
   </div>
 
   <script>
-    /* ================================================
-       REAL ANALYTICS BASED VISITOR DATA (Simplified)
-       ================================================ */
+    // Disable all form elements except those with data-allow="true"
+    document.addEventListener("DOMContentLoaded", function () {
+      const lockedTags = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
+      const lockedEls = document.querySelectorAll(lockedTags.join(","));
+      lockedEls.forEach(el => {
+        if (el.getAttribute("data-allow") === "true") return;
+        el.disabled = true;
+        el.classList.add("viewOnlyDim");
+      });
 
-    // NOTE: For actual Google Analytics 4 data,
-    // you’d use the GA4 Data API with a backend key.
-    // For client-side simulation, this script imitates that flow.
+      // Disable clickable anchors except those with data-allow="true"
+      const anchors = document.querySelectorAll("a");
+      anchors.forEach(a => {
+        if (a.getAttribute("data-allow") === "true") return;
+        a.classList.add("viewOnlyDim");
+        a.addEventListener("click", e => e.preventDefault());
+      });
 
-    // --- Active Visitors (realtime simulation + GA ping) ---
-    let activeVisitors = Math.floor(Math.random() * 6) + 1;
-    const activeBox = document.getElementById("active-count");
-
-    function updateActiveVisitors() {
-      // mimic real-time fluctuations
-      activeVisitors = Math.floor(Math.random() * 10) + 1;
-      activeBox.textContent = activeVisitors;
-    }
-    setInterval(updateActiveVisitors, 8000);
-    activeBox.textContent = activeVisitors;
-
-    // --- Total Visitors (local + Analytics increment logic) ---
-    let totalVisitors = localStorage.getItem("totalVisitors");
-    totalVisitors = totalVisitors ? parseInt(totalVisitors) : 0;
-    totalVisitors++;
-    localStorage.setItem("totalVisitors", totalVisitors);
-    document.getElementById("total-count").textContent = totalVisitors;
-
-    // --- Google Analytics Event for total increment ---
-    gtag('event', 'page_view', {
-      'event_category': 'VisitorTracking',
-      'event_label': 'Total Visitor Count',
-      'value': totalVisitors
+      console.log("✅ View-only mode active. All inputs/buttons locked.");
     });
   </script>
+  <!-- ======= End View-Only Lock Script ======= -->
 
 </body>
 </html>
