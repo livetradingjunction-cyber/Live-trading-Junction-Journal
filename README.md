@@ -14,3 +14,12 @@ Hosted on GitHub Pages · SEO Optimized · Google-Analytics Integrated
 - Auto PnL & Performance Tracking  
 - Crypto + Equity + Index Range Calculators  
 - Fully Mobile-Responsive Layout
+---
+
+### 💻 Tech Stack
+- HTML5 + Tailwind CSS + Vanilla JS
+- Google Analytics 4 (Realtime Tracking)
+- GitHub Pages Hosting (Fast & Free)
+
+---
+**© 2025 LiveTradingJunction-Cyber** | Built with 💙 for Traders & Analysts
