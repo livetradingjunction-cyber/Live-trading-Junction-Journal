@@ -1,0 +1,21 @@
+{
+  "name": "Trading Journal",
+  "short_name": "Trading Journal",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#111827",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
