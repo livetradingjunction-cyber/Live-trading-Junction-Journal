@@ -1,21 +1,22 @@
 {
   "name": "Trading Journal",
-  "short_name": "Trading Journal",
-  "start_url": ".",
+  "short_name": "Journal",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f172a",
-  "theme_color": "#111827",
-  "orientation": "portrait",
+  "theme_color": "#0f172a",
+  "description": "Real-time Trading Journal Tracker for Nifty, Banknifty, Gold & BTC",
   "icons": [
     {
-      "src": "https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "favicon.ico",
+      "sizes": "64x64 128x128 256x256",
+      "type": "image/x-icon"
     },
     {
-      "src": "https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico",
+      "src": "favicon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     }
   ]
 }

@@ -16,19 +16,18 @@
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
 
-  <!-- ✅ Manifest (PWA App Info) -->
-  <link rel="manifest" href="manifest.json">
+  <!-- ✅ Manifest + Service Worker -->
+<link rel="manifest" href="manifest.json">
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("✅ Service Worker Registered"))
+      .catch(err => console.log("❌ SW Registration Failed:", err));
+    });
+  }
+</script>
 
-  <!-- ✅ Service Worker Registration -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("service-worker.js")
-          .then(() => console.log("✅ Service Worker Registered"))
-          .catch(err => console.log("❌ SW Registration Failed:", err));
-      });
-    }
-  </script>
 
   <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
