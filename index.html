@@ -2,68 +2,132 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Journal</title>
 
-  <!-- ✅ Favicon -->
-  <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon-192.png" />
+  <!-- ✅ SEO + Performance -->
+  <link rel="preconnect" href="https://www.google-analytics.com" />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <meta name="description" content="Trading Journal — Smart, Fast Tracker for Nifty, Banknifty, BTC & Gold." />
+  <meta name="keywords" content="Trading Journal, Nifty, Banknifty, BTC, Gold, Analytics" />
+  <meta name="author" content="LiveTradingJunction-Cyber" />
   <meta name="theme-color" content="#0f172a" />
 
-  <!-- ✅ PWA Manifest -->
-  <link rel="manifest" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/manifest.json" />
+  <!-- ✅ Favicon -->
+  <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
 
-  <!-- ✅ Register Service Worker -->
+  <!-- ✅ PWA Integration -->
+  <link rel="manifest" href="manifest.json" />
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/service-worker.js")
+        navigator.serviceWorker
+          .register("service-worker.js")
           .then(() => console.log("✅ Service Worker Registered"))
-          .catch(err => console.log("❌ SW Registration Failed:", err));
+          .catch((err) => console.log("❌ SW Registration Failed:", err));
       });
     }
+
+    // Listen for install prompt
+    let deferredPrompt;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById("installBtn").style.display = "inline-flex";
+      console.log("✅ Install prompt available");
+    });
+
+    // Handle button click
+    async function installApp() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      console.log("User choice:", choice.outcome);
+      deferredPrompt = null;
+      document.getElementById("installBtn").style.display = "none";
+    }
+
+    // When app is installed
+    window.addEventListener("appinstalled", () => {
+      console.log("✅ App installed successfully!");
+      document.getElementById("installBtn").style.display = "none";
+    });
   </script>
 
-  <!-- ✅ Google Analytics (optional) -->
+  <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag("js", new Date());
     gtag("config", "G-L1VHQ9XSFQ");
   </script>
 
   <style>
+    :root {
+      --light-bg: #f9fafb;
+      --light-text: #111827;
+      --dark-bg: #0f172a;
+      --dark-text: #f9fafb;
+      --accent-green: linear-gradient(90deg, #16a34a, #22c55e);
+      --accent-red: linear-gradient(90deg, #ef4444, #b91c1c);
+    }
+
     body {
-      font-family: "Poppins", sans-serif;
-      background: #0f172a10;
       margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: var(--light-bg);
+      color: var(--light-text);
+      transition: background 0.5s, color 0.5s;
+      overflow-x: hidden;
     }
 
+    body.dark {
+      background: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    /* 📱 Install Button */
     #installBtn {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 9999;
-      background: linear-gradient(90deg, #10b981, #047857);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-weight: 600;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
       display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent-green);
+      color: #fff;
+      font-weight: 600;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      z-index: 9999;
+      transition: transform 0.25s ease;
     }
+    #installBtn:hover { transform: scale(1.07); }
 
-    #installBtn:hover {
-      transform: scale(1.05);
+    /* 🌙 Theme Toggle */
+    .themeToggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-green);
+      border: none;
+      color: white;
+      font-size: 20px;
+      padding: 8px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+      z-index: 9999;
     }
+    .themeToggle:hover { transform: scale(1.1); }
   </style>
 </head>
 
 <body>
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -5958,30 +6022,21 @@ window.onload = () => {
 </script>
 </body>
 </html>
-  <button id="installBtn">📥 Install Trading Journal</button>
 
-  <script>
-    let deferredPrompt = null;
+  <button id="installBtn" onclick="installApp()">📥 Install Trading Journal</button>
 
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById("installBtn").style.display = "inline-flex";
-      console.log("✅ Install prompt ready");
-    });
+  <button class="themeToggle" id="themeToggle">🌙</button>
 
-    document.getElementById("installBtn").addEventListener("click", async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const result = await deferredPrompt.userChoice;
-      console.log("🟢 User choice:", result.outcome);
-      deferredPrompt = null;
-      document.getElementById("installBtn").style.display = "none";
-    });
+  <script defer>
+    // 🌗 Auto Theme Detection
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (prefersDark) document.body.classList.add("dark");
 
-    window.addEventListener("appinstalled", () => {
-      console.log("✅ PWA Installed!");
-      document.getElementById("installBtn").style.display = "none";
+    // 🌙 Toggle
+    const toggle = document.getElementById("themeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark") ? "🌞" : "🌙";
     });
   </script>
 </body>
