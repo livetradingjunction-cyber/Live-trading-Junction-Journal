@@ -5,30 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Journal</title>
 
-  <!-- ✅ Preconnect for faster analytics -->
+  <!-- ✅ Performance & SEO -->
   <link rel="preconnect" href="https://www.google-analytics.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  <meta name="description" content="Trading Journal — Fast, Smart, Adaptive Tracker for Nifty, Banknifty, BTC & Gold." />
+  <meta name="keywords" content="Trading Journal, Nifty Tracker, Gold Calculator, BTC Journal, PnL Tracker" />
+  <meta name="author" content="LiveTradingJunction-Cyber" />
+  <meta name="theme-color" content="#111827" />
 
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
-  <meta name="theme-color" content="#111827" />
 
-  <!-- ✅ PWA Integration -->
+  <!-- ✅ Manifest (PWA App Info) -->
   <link rel="manifest" href="manifest.json">
+
+  <!-- ✅ Service Worker Registration -->
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("service-worker.js").then(() => {
-          console.log("✅ Service Worker Registered");
-        });
+        navigator.serviceWorker.register("service-worker.js")
+          .then(() => console.log("✅ Service Worker Registered"))
+          .catch(err => console.log("❌ SW Registration Failed:", err));
       });
     }
   </script>
-
-  <!-- ✅ SEO -->
-  <meta name="description" content="Trading Journal — Real-time Tracker for Nifty, Banknifty, BTC & Gold with Auto Analytics and Smart View Mode." />
-  <meta name="keywords" content="Trading Journal, Nifty, Banknifty, Gold, BTC, Crypto, PnL Tracker, Live Trading, Analytics" />
-  <meta name="author" content="LiveTradingJunction-Cyber" />
 
   <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
@@ -51,7 +51,7 @@
 
     body {
       margin: 0;
-      font-family: system-ui, "Poppins", sans-serif;
+      font-family: "Poppins", sans-serif;
       background: var(--light-bg);
       color: var(--light-text);
       transition: background 0.5s, color 0.5s;
@@ -132,7 +132,6 @@
 </head>
 
 <body>
-
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6029,20 +6028,17 @@ window.onload = () => {
 </body>
 </html>
 
-  <!-- 💚 View-only Badge -->
   <div class="viewOnlyBadge">🔒 View-Only Mode Enabled — Editing Locked</div>
 
-  <!-- 🔴 Back Button -->
   <button class="backToJournal" data-allow="true"
     onclick="window.location.href='https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/'">
     ⬅ Back To Journal
   </button>
 
-  <!-- 🌗 Theme Toggle -->
   <button class="themeToggle" id="themeToggle">🌙</button>
 
   <script defer>
-    // ⚙️ View-only lock system
+    // ⚙️ View-only lock
     document.addEventListener("DOMContentLoaded", () => {
       const tags = ["INPUT","TEXTAREA","SELECT","BUTTON"];
       document.querySelectorAll(tags.join(",")).forEach(el => {
@@ -6057,7 +6053,7 @@ window.onload = () => {
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     if (prefersDark) document.body.classList.add("dark");
 
-    // 🌙 Manual Toggle
+    // 🌙 Toggle
     const toggle = document.getElementById("themeToggle");
     toggle.addEventListener("click", () => {
       document.body.classList.toggle("dark");
