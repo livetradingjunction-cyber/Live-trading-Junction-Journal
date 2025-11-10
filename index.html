@@ -3,41 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live Trading Junction Journal</title>
+  <title>Trading Journal</title>
 
-  <!-- ✅ Google Verification -->
-  <meta name="google-site-verification" content="iarkQywYkFLaL6gvIPgngYWjFFN8u-QZjH87QpdezZk" />
+  <!-- ✅ Preconnect for faster analytics -->
+  <link rel="preconnect" href="https://www.google-analytics.com" />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
-  <link rel="apple-touch-icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
   <meta name="theme-color" content="#111827" />
 
-  <!-- ✅ Manifest (inline JSON for PWA) -->
-  <link rel="manifest" href="data:application/manifest+json,{
-    &quot;name&quot;:&quot;Live Trading Junction Journal&quot;,
-    &quot;short_name&quot;:&quot;LTJ Journal&quot;,
-    &quot;start_url&quot;:&quot;/Live-trading-Junction-Journal/&quot;,
-    &quot;scope&quot;:&quot;/Live-trading-Junction-Journal/&quot;,
-    &quot;display&quot;:&quot;standalone&quot;,
-    &quot;background_color&quot;:&quot;#111827&quot;,
-    &quot;theme_color&quot;:&quot;#111827&quot;,
-    &quot;description&quot;:&quot;Real-time Trade Journal for Nifty, Banknifty, BTC & Gold. Track performance like a pro.&quot;,
-    &quot;icons&quot;:[
-      {&quot;src&quot;:&quot;https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/x-icon&quot;},
-      {&quot;src&quot;:&quot;https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/x-icon&quot;}
-    ]
-  }">
-
-  <!-- ✅ SEO Meta -->
-  <meta name="description" content="📊 Live Trading Junction Journal — Real-time Trading Tracker for Nifty, Banknifty, Gold, BTC & Crypto. Smart Analytics. Discipline-Based PnL Insights." />
-  <meta name="keywords" content="Live Trading Journal, Nifty Tracker, Banknifty Journal, BTC Gold Calculator, Crypto Trades, Live PnL Tracker, Trader Discipline App" />
+  <!-- ✅ SEO -->
+  <meta name="description" content="Trading Journal — Real-time Tracker for Nifty, Banknifty, BTC & Gold with Auto Analytics and Smart View Mode." />
+  <meta name="keywords" content="Trading Journal, Nifty, Banknifty, Gold, BTC, Crypto, PnL Tracker, Live Trading, Analytics" />
   <meta name="author" content="LiveTradingJunction-Cyber" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Live Trading Junction Journal 💹" />
-  <meta property="og:description" content="Real-time Trade Analytics • Smart Reports • Live PnL Tracking • Built for Pro Traders 🚀" />
-  <meta property="og:url" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/" />
-  <meta property="og:image" content="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/meta-preview.png" />
 
   <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
@@ -49,20 +28,36 @@
   </script>
 
   <style>
+    :root {
+      --light-bg: #f9fafb;
+      --light-text: #111827;
+      --dark-bg: #0f172a;
+      --dark-text: #f9fafb;
+      --accent-green: linear-gradient(90deg, #16a34a, #22c55e);
+      --accent-red: linear-gradient(90deg, #ef4444, #b91c1c);
+    }
+
     body {
       margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: #f9fafb;
+      font-family: system-ui, "Poppins", sans-serif;
+      background: var(--light-bg);
+      color: var(--light-text);
+      transition: background 0.5s, color 0.5s;
       overflow-x: hidden;
     }
 
-    /* 💚 View-Only Mode Blinking Badge */
+    body.dark {
+      background: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    /* 💚 View-Only Badge */
     .viewOnlyBadge {
       position: fixed;
-      bottom: 130px; /* above taskbar */
+      bottom: 130px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(90deg, #16a34a, #22c55e);
+      background: var(--accent-green);
       color: white;
       font-weight: 600;
       padding: 12px 28px;
@@ -75,20 +70,20 @@
       font-size: 15px;
       z-index: 10000;
     }
-    .viewOnlyBadge::before { content: "🔒"; font-size: 18px; }
+
     @keyframes pulseGlow {
-      0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 25px rgba(22,163,74,0.5); opacity: 1; }
-      50% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 40px rgba(22,163,74,0.8); opacity: 0.85; }
-      100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 25px rgba(22,163,74,0.5); opacity: 1; }
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      50% { transform: translateX(-50%) scale(1.05); opacity: 0.85; }
+      100% { transform: translateX(-50%) scale(1); opacity: 1; }
     }
 
-    /* 🔴 Back To Journal Button */
+    /* 🔴 Back Button */
     .backToJournal {
       position: fixed;
       bottom: 55px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(90deg, #ef4444, #b91c1c);
+      background: var(--accent-red);
       color: #fff;
       border: none;
       font-weight: 600;
@@ -101,11 +96,31 @@
     }
     .backToJournal:hover { transform: translateX(-50%) scale(1.07); }
 
+    /* 🌙 Theme Toggle */
+    .themeToggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-green);
+      border: none;
+      color: white;
+      font-size: 20px;
+      padding: 8px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+      z-index: 9999;
+    }
+    .themeToggle:hover { transform: scale(1.1); }
+
+    /* View-only dim */
     .viewOnlyDim { pointer-events: none !important; opacity: 0.6 !important; }
   </style>
 </head>
 
 <body>
+
   <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -482,7 +497,7 @@
 }
 /* Checked states enhanced with brighter gradients */
 #weeklyArea .radio-group input[type="radio"]:checked + label {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: linear-gradient(135deg, #6366f1, #F67280);
   color: white;
   border-color: #6366f1;
   transform: scale(1.05);
@@ -654,7 +669,7 @@ body {
   color:#fff; font-size:48px; font-weight:900; margin:0; text-shadow:2px 2px 4px rgba(0,0,0,0.3);
   display:flex; align-items:center; justify-content:center; gap:10px;
   padding: 15px 30px;
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background: linear-gradient(135deg, #F67280, #7c3aed);
   border-radius: 50px;
   border: 2px solid rgba(255,255,255,0.3);
   box-shadow: 0 8px 25px rgba(79,70,229,0.4);
@@ -1149,7 +1164,7 @@ tbody tr:hover td { background:var(--input-bg); }
   transition: all 0.2s;
 }
 #searchFilterModal button:hover {
-  background: #4f46e5;
+  background: #F67280;
   transform: translateY(-1px);
 }
 #searchFilterModal #filteredTrades {
@@ -1237,7 +1252,7 @@ tbody tr:hover td { background:var(--input-bg); }
   transition: all 0.2s;
 }
 #riskCalculatorModal button:hover {
-  background: #4f46e5;
+  background: #F67280;
   transform: translateY(-1px);
 }
 #riskCalculatorModal #riskResult {
@@ -1346,7 +1361,7 @@ tbody tr:hover td { background:var(--input-bg); }
   transition: all 0.2s;
 }
 #mistakesModal button:hover {
-  background: #4f46e5;
+  background: #F67280;
   transform: translateY(-1px);
 }
 /* Updated: Style for form title like a button */
@@ -2104,7 +2119,7 @@ tbody tr:hover td { background:var(--input-bg); }
 <div class="container" id="journalArea">
   <!-- TITLE BAR -->
   <div class="title-bar">
-    <h1>Live Trading Junction Journal</h1>
+    <h1>Trading Journal</h1>
   </div>
   <!-- Present Capital Button -->
   <div style="text-align: center; margin: 20px 0;">
@@ -3794,7 +3809,7 @@ ${csv}
 \`\`\`
 If email doesn't open, use the "Download Excel" button instead.
 Best,
-Live Trading Junction Journal`;
+Trading Journal`;
   const encodedSubject = encodeURIComponent(subject);
   const encodedBody = encodeURIComponent(body);
   const mailtoLink = `mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`;
@@ -6002,65 +6017,40 @@ window.onload = () => {
 </body>
 </html>
 
-  <div class="viewOnlyBadge">View-Only Mode Enabled — Editing Locked</div>
+  <!-- 💚 View-only Badge -->
+  <div class="viewOnlyBadge">🔒 View-Only Mode Enabled — Editing Locked</div>
 
+  <!-- 🔴 Back Button -->
   <button class="backToJournal" data-allow="true"
     onclick="window.location.href='https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/'">
     ⬅ Back To Journal
   </button>
 
-  <script>
-    // View-only lock system
-    document.addEventListener("DOMContentLoaded", function () {
-      const lockedTags = ["INPUT","TEXTAREA","SELECT","BUTTON"];
-      document.querySelectorAll(lockedTags.join(",")).forEach(el => {
+  <!-- 🌗 Theme Toggle -->
+  <button class="themeToggle" id="themeToggle">🌙</button>
+
+  <script defer>
+    // ⚙️ View-only lock system
+    document.addEventListener("DOMContentLoaded", () => {
+      const tags = ["INPUT","TEXTAREA","SELECT","BUTTON"];
+      document.querySelectorAll(tags.join(",")).forEach(el => {
         if (el.getAttribute("data-allow") === "true") return;
-        el.disabled = true; el.classList.add("viewOnlyDim");
+        el.disabled = true;
+        el.classList.add("viewOnlyDim");
       });
-      document.querySelectorAll("a").forEach(a => {
-        if (a.getAttribute("data-allow") === "true") return;
-        a.classList.add("viewOnlyDim");
-        a.addEventListener("click", e => e.preventDefault());
-      });
-      console.log("✅ View-only mode active.");
+      console.log("✅ View-only active");
     });
 
-    // Inline PWA Service Worker
-    const swCode = `
-      const CACHE_NAME = 'ltj-cache-v1';
-      const BASE = '/Live-trading-Junction-Journal/';
-      const PRECACHE = [BASE, BASE + 'index.html', BASE + 'favicon.ico'];
-      self.addEventListener('install', e => {
-        e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(PRECACHE)));
-        self.skipWaiting();
-      });
-      self.addEventListener('activate', e => {
-        e.waitUntil(caches.keys().then(keys => Promise.all(keys.map(k => k === CACHE_NAME ? null : caches.delete(k)))));
-        self.clients.claim();
-      });
-      self.addEventListener('fetch', e => {
-        const req = e.request;
-        const html = req.headers.get('accept')?.includes('text/html');
-        if (html) {
-          e.respondWith(
-            fetch(req).then(res => {
-              const copy = res.clone();
-              caches.open(CACHE_NAME).then(c => c.put(req, copy));
-              return res;
-            }).catch(() => caches.match(req))
-          );
-        } else {
-          e.respondWith(caches.match(req).then(r => r || fetch(req)));
-        }
-      });
-    `;
-    if ('serviceWorker' in navigator) {
-      const blob = new Blob([swCode], { type: "text/javascript" });
-      const swURL = URL.createObjectURL(blob);
-      navigator.serviceWorker.register(swURL)
-        .then(() => console.log("✅ PWA Ready — App can be installed"))
-        .catch(err => console.log("❌ SW Registration failed:", err));
-    }
+    // 🌗 Auto Theme Detection
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (prefersDark) document.body.classList.add("dark");
+
+    // 🌙 Manual Toggle
+    const toggle = document.getElementById("themeToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark") ? "🌞" : "🌙";
+    });
   </script>
 </body>
 </html>
