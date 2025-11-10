@@ -13,6 +13,18 @@
   <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
   <meta name="theme-color" content="#111827" />
 
+  <!-- ✅ PWA Integration -->
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js").then(() => {
+          console.log("✅ Service Worker Registered");
+        });
+      });
+    }
+  </script>
+
   <!-- ✅ SEO -->
   <meta name="description" content="Trading Journal — Real-time Tracker for Nifty, Banknifty, BTC & Gold with Auto Analytics and Smart View Mode." />
   <meta name="keywords" content="Trading Journal, Nifty, Banknifty, Gold, BTC, Crypto, PnL Tracker, Live Trading, Analytics" />
@@ -121,7 +133,7 @@
 
 <body>
 
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
