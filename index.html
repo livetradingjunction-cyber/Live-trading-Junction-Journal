@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Journal</title>
 
-  <!-- ✅ SEO & Performance -->
+  <!-- ✅ SEO + Performance -->
   <link rel="preconnect" href="https://www.google-analytics.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   <meta name="description" content="Trading Journal — Fast, Smart, Adaptive Tracker for Nifty, Banknifty, BTC & Gold." />
@@ -16,14 +16,14 @@
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
 
-  <!-- ✅ PWA Manifest + Service Worker -->
+  <!-- ✅ PWA Integration -->
   <link rel="manifest" href="./manifest.json" />
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("./service-worker.js")
-          .then(() => console.log("✅ Service Worker Registered"))
-          .catch(err => console.log("❌ SW Registration Failed:", err));
+        .then(() => console.log("✅ Service Worker Registered"))
+        .catch(err => console.log("❌ SW Registration Failed:", err));
       });
     }
 
@@ -130,12 +130,12 @@
     .themeToggle:hover { transform: scale(1.1); }
 
     /* View-only dim */
-    .viewOnlyDim { pointer-events: none !important; opacity: 0.6 !important; }
+    .viewOnlyDim { opacity: 0.7; }
   </style>
 </head>
 
 <body>
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -6040,16 +6040,15 @@ window.onload = () => {
 
   <button class="themeToggle" id="themeToggle">🌙</button>
 
+  <!-- ⚙️ Safe View-Only Script (PWA Compatible) -->
   <script defer>
-    // ⚙️ View-only lock
     document.addEventListener("DOMContentLoaded", () => {
-      const tags = ["INPUT","TEXTAREA","SELECT","BUTTON"];
-      document.querySelectorAll(tags.join(",")).forEach(el => {
-        if (el.getAttribute("data-allow") === "true") return;
-        el.disabled = true;
+      const lockTags = ["INPUT", "TEXTAREA", "SELECT"];
+      document.querySelectorAll(lockTags.join(",")).forEach(el => {
+        el.readOnly = true; // read-only instead of disabled
         el.classList.add("viewOnlyDim");
       });
-      console.log("✅ View-only active");
+      console.log("✅ Safe View-Only active (PWA compatible)");
     });
 
     // 🌗 Auto Theme Detection
