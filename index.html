@@ -5,46 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Trading Journal</title>
 
-  <!-- SEO/Perf (optional) -->
-  <meta name="description" content="Trading Journal — Fast, Smart, Adaptive Tracker for Nifty, Banknifty, BTC & Gold.">
-  <meta name="theme-color" content="#0f172a">
-  <link rel="icon" href="favicon-192.png" type="image/png">
+  <!-- ✅ Favicon -->
+  <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon-192.png" />
+  <meta name="theme-color" content="#0f172a" />
 
-  <!-- ✅ PWA Manifest + Service Worker -->
-  <link rel="manifest" href="manifest.json">
+  <!-- ✅ PWA Manifest -->
+  <link rel="manifest" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/manifest.json" />
+
+  <!-- ✅ Register Service Worker -->
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("service-worker.js")
+        navigator.serviceWorker.register("https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/service-worker.js")
           .then(() => console.log("✅ Service Worker Registered"))
           .catch(err => console.log("❌ SW Registration Failed:", err));
       });
     }
   </script>
 
-  <!-- ✅ GA4 (optional) -->
+  <!-- ✅ Google Analytics (optional) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date()); gtag("config", "G-L1VHQ9XSFQ");
+    gtag("js", new Date());
+    gtag("config", "G-L1VHQ9XSFQ");
   </script>
 
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,"Poppins",Segoe UI,Roboto,sans-serif;background:#0f172a10;}
-    /* Install button look */
-    #installBtn{
-      position:fixed;right:20px;bottom:20px;z-index:10001;display:none;
-      background:#111827;color:#fff;border:0;padding:10px 14px;border-radius:10px;
-      box-shadow:0 10px 24px rgba(0,0,0,.25);cursor:pointer;font-weight:600
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #0f172a10;
+      margin: 0;
     }
-    /* Safe view-only dim class (PWA-friendly) */
-    .viewOnlyDim{opacity:.7}
+
+    #installBtn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 9999;
+      background: linear-gradient(90deg, #10b981, #047857);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+      display: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #installBtn:hover {
+      transform: scale(1.05);
+    }
   </style>
 </head>
-<body>
 
-  <!DOCTYPE html>
+<body>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -5939,43 +5958,31 @@ window.onload = () => {
 </script>
 </body>
 </html>
-  <!-- OPTIONAL: Safe View-Only Lock (does NOT break PWA installability) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const lockTags = ["INPUT","TEXTAREA","SELECT"]; // no BUTTON/A lock (Chrome needs interactivity)
-      document.querySelectorAll(lockTags.join(",")).forEach(el => {
-        el.readOnly = true;               // instead of disabled
-        el.classList.add("viewOnlyDim");  // just a visual hint
-      });
-      console.log("✅ Safe View-Only ready.");
-    });
-  </script>
+  <button id="installBtn">📥 Install Trading Journal</button>
 
-  <!-- ✅ Install App Button (manual, recommended by Chrome) -->
-  <button id="installBtn">📥 Install App</button>
   <script>
     let deferredPrompt = null;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();               // stop mini-infobar
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
       deferredPrompt = e;
-      document.getElementById('installBtn').style.display = 'inline-flex';
-      console.log('✅ Install prompt available');
+      document.getElementById("installBtn").style.display = "inline-flex";
+      console.log("✅ Install prompt ready");
     });
 
-    document.getElementById('installBtn').addEventListener('click', async () => {
+    document.getElementById("installBtn").addEventListener("click", async () => {
       if (!deferredPrompt) return;
-      document.getElementById('installBtn').disabled = true;
       deferredPrompt.prompt();
-      await deferredPrompt.userChoice;  // { outcome: 'accepted' | 'dismissed' }
+      const result = await deferredPrompt.userChoice;
+      console.log("🟢 User choice:", result.outcome);
       deferredPrompt = null;
-      document.getElementById('installBtn').style.display = 'none';
+      document.getElementById("installBtn").style.display = "none";
     });
 
-    window.addEventListener('appinstalled', () => {
-      console.log('✅ App installed');
-      document.getElementById('installBtn').style.display = 'none';
+    window.addEventListener("appinstalled", () => {
+      console.log("✅ PWA Installed!");
+      document.getElementById("installBtn").style.display = "none";
     });
   </script>
-
 </body>
 </html>
