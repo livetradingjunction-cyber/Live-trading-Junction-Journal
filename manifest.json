@@ -2,10 +2,11 @@
   "name": "Trading Journal",
   "short_name": "Journal",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
-  "description": "Real-time Trading Journal Tracker for Nifty, Banknifty, Gold & BTC",
+  "description": "Trading Journal — Track Nifty, Banknifty, BTC & Gold with Real-time Analytics and Offline Access.",
   "icons": [
     {
       "src": "favicon.ico",

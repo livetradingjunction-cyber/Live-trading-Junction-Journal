@@ -5,29 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Journal</title>
 
-  <!-- ✅ Performance & SEO -->
+  <!-- ✅ SEO & Performance -->
   <link rel="preconnect" href="https://www.google-analytics.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   <meta name="description" content="Trading Journal — Fast, Smart, Adaptive Tracker for Nifty, Banknifty, BTC & Gold." />
   <meta name="keywords" content="Trading Journal, Nifty Tracker, Gold Calculator, BTC Journal, PnL Tracker" />
   <meta name="author" content="LiveTradingJunction-Cyber" />
-  <meta name="theme-color" content="#111827" />
+  <meta name="theme-color" content="#0f172a" />
 
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
 
-  <!-- ✅ Manifest + Service Worker -->
-<link rel="manifest" href="manifest.json">
-<script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("service-worker.js")
-      .then(() => console.log("✅ Service Worker Registered"))
-      .catch(err => console.log("❌ SW Registration Failed:", err));
-    });
-  }
-</script>
+  <!-- ✅ PWA Manifest + Service Worker -->
+  <link rel="manifest" href="./manifest.json" />
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+          .then(() => console.log("✅ Service Worker Registered"))
+          .catch(err => console.log("❌ SW Registration Failed:", err));
+      });
+    }
 
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      console.log("✅ Install prompt available");
+    });
+  </script>
 
   <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
@@ -131,7 +135,7 @@
 </head>
 
 <body>
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
