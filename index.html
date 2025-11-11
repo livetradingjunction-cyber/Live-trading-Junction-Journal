@@ -5,129 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Journal</title>
 
-  <!-- ✅ SEO + Performance -->
-  <link rel="preconnect" href="https://www.google-analytics.com" />
-  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-  <meta name="description" content="Trading Journal — Smart, Fast Tracker for Nifty, Banknifty, BTC & Gold." />
-  <meta name="keywords" content="Trading Journal, Nifty, Banknifty, BTC, Gold, Analytics" />
+  <!-- ✅ SEO & Performance -->
+  <meta name="description" content="Trading Journal — Real-time tracker for Nifty, Banknifty, BTC & Gold with Firebase login integration." />
   <meta name="author" content="LiveTradingJunction-Cyber" />
-  <meta name="theme-color" content="#0f172a" />
-
-  <!-- ✅ Favicon -->
-  <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
-
-  <!-- ✅ PWA Integration -->
-  <link rel="manifest" href="manifest.json" />
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("service-worker.js")
-          .then(() => console.log("✅ Service Worker Registered"))
-          .catch((err) => console.log("❌ SW Registration Failed:", err));
-      });
-    }
-
-    // Listen for install prompt
-    let deferredPrompt;
-    window.addEventListener("beforeinstallprompt", (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById("installBtn").style.display = "inline-flex";
-      console.log("✅ Install prompt available");
-    });
-
-    // Handle button click
-    async function installApp() {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const choice = await deferredPrompt.userChoice;
-      console.log("User choice:", choice.outcome);
-      deferredPrompt = null;
-      document.getElementById("installBtn").style.display = "none";
-    }
-
-    // When app is installed
-    window.addEventListener("appinstalled", () => {
-      console.log("✅ App installed successfully!");
-      document.getElementById("installBtn").style.display = "none";
-    });
-  </script>
+  <link rel="icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
 
   <!-- ✅ Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag("js", new Date());
     gtag("config", "G-L1VHQ9XSFQ");
   </script>
 
   <style>
-    :root {
-      --light-bg: #f9fafb;
-      --light-text: #111827;
-      --dark-bg: #0f172a;
-      --dark-text: #f9fafb;
-      --accent-green: linear-gradient(90deg, #16a34a, #22c55e);
-      --accent-red: linear-gradient(90deg, #ef4444, #b91c1c);
-    }
-
     body {
-      margin: 0;
       font-family: "Poppins", sans-serif;
-      background: var(--light-bg);
-      color: var(--light-text);
-      transition: background 0.5s, color 0.5s;
+      background: #0f172a;
+      color: white;
+      margin: 0;
       overflow-x: hidden;
     }
 
-    body.dark {
-      background: var(--dark-bg);
-      color: var(--dark-text);
-    }
-
-    /* 📱 Install Button */
-    #installBtn {
-      display: none;
+    /* 🔝 Top Navbar */
+    .topBar {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--accent-green);
-      color: #fff;
-      font-weight: 600;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      top: 0;
+      width: 100%;
+      background: rgba(17, 24, 39, 0.8);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      padding: 14px 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
       z-index: 9999;
-      transition: transform 0.25s ease;
     }
-    #installBtn:hover { transform: scale(1.07); }
 
-    /* 🌙 Theme Toggle */
-    .themeToggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--accent-green);
+    .topBar h1 {
+      font-size: 22px;
+      margin: 0;
+      color: #38bdf8;
+    }
+
+    /* 🔐 Auth Buttons */
+    .authButtons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .authButtons button {
+      background: linear-gradient(90deg, #2563eb, #1d4ed8);
       border: none;
       color: white;
-      font-size: 20px;
-      padding: 8px 14px;
-      border-radius: 50%;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease;
-      z-index: 9999;
+      transition: transform 0.2s;
     }
-    .themeToggle:hover { transform: scale(1.1); }
+
+    .authButtons button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #1e40af, #3b82f6);
+    }
+
+    #authStatus {
+      text-align: center;
+      font-weight: bold;
+      color: #4ade80;
+      margin-top: 80px;
+    }
+
+    /* Body container placeholder */
+    .mainContent {
+      margin-top: 130px;
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
-  <!DOCTYPE html>
+  <!-- 🔝 Navbar -->
+  <div class="topBar">
+    <h1>Trading Journal</h1>
+    <div class="authButtons">
+      <button id="signInBtn">Sign In</button>
+      <button id="signOutBtn" style="display:none;">Sign Out</button>
+    </div>
+  </div>
+
+  <p id="authStatus">Checking authentication...</p>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -6022,21 +5993,82 @@ window.onload = () => {
 </script>
 </body>
 </html>
+  <div class="mainContent" id="journalContent" style="display:none;">
+    <h2>Welcome to Live Trading Journal 📈</h2>
+    <p>Your dashboard will appear here after login.</p>
+  </div>
 
-  <button id="installBtn" onclick="installApp()">📥 Install Trading Journal</button>
+  <!-- ✅ Firebase Authentication -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut }
+      from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-  <button class="themeToggle" id="themeToggle">🌙</button>
+    // 🔧 Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDb_OmZJYuJ0kgFd8vKtbInFFrSno8uA9E",
+      authDomain: "live-trading-junction.firebaseapp.com",
+      projectId: "live-trading-junction",
+      storageBucket: "live-trading-junction.appspot.com",
+      messagingSenderId: "907137926761",
+      appId: "1:907137926761:web:170dfed07047d1f0eb44f8"
+    };
 
-  <script defer>
-    // 🌗 Auto Theme Detection
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (prefersDark) document.body.classList.add("dark");
+    // 🚀 Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
-    // 🌙 Toggle
-    const toggle = document.getElementById("themeToggle");
-    toggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      toggle.textContent = document.body.classList.contains("dark") ? "🌞" : "🌙";
+    // 🟢 Elements
+    const signInBtn = document.getElementById("signInBtn");
+    const signOutBtn = document.getElementById("signOutBtn");
+    const authStatus = document.getElementById("authStatus");
+    const journalContent = document.getElementById("journalContent");
+
+    // 🟢 Google Sign-in
+    signInBtn.addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then(result => {
+          const user = result.user;
+          authStatus.innerText = `✅ Logged in as ${user.displayName}`;
+          signInBtn.style.display = "none";
+          signOutBtn.style.display = "inline-block";
+          journalContent.style.display = "block";
+        })
+        .catch(error => {
+          console.error(error.message);
+          authStatus.innerText = "❌ Login failed!";
+        });
+    });
+
+    // 🔴 Sign-out
+    signOutBtn.addEventListener("click", () => {
+      signOut(auth)
+        .then(() => {
+          authStatus.innerText = "👋 Signed out successfully.";
+          signInBtn.style.display = "inline-block";
+          signOutBtn.style.display = "none";
+          journalContent.style.display = "none";
+        })
+        .catch(error => {
+          console.error(error.message);
+          authStatus.innerText = "❌ Error signing out!";
+        });
+    });
+
+    // 🔄 Monitor Auth State
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        authStatus.innerText = `✅ Logged in as ${user.displayName || user.email}`;
+        signInBtn.style.display = "none";
+        signOutBtn.style.display = "inline-block";
+        journalContent.style.display = "block";
+      } else {
+        authStatus.innerText = "⚠️ Please sign in to access the Journal.";
+        signInBtn.style.display = "inline-block";
+        signOutBtn.style.display = "none";
+        journalContent.style.display = "none";
+      }
     });
   </script>
 </body>
