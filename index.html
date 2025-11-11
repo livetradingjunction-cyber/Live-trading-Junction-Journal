@@ -5,136 +5,158 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Journal</title>
 
-  <!-- ✅ SEO & Analytics -->
-  <meta name="description" content="Trading Journal — Login securely via Google or Email to access your Live Trading Dashboard." />
+  <!-- ✅ SEO -->
+  <meta name="description" content="Trading Journal — Track Nifty, Banknifty, BTC & Gold with Real-time Analytics." />
+  <meta name="keywords" content="Trading Journal, Nifty Tracker, Gold Calculator, BTC Journal, Live PnL Tracker" />
   <meta name="author" content="LiveTradingJunction-Cyber" />
-  <link rel="icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
 
-  <!-- ✅ Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1VHQ9XSFQ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-L1VHQ9XSFQ");
+  <!-- ✅ Favicon -->
+  <link rel="icon" href="favicon.ico" />
+
+  <!-- ✅ Firebase SDK -->
+  <script type="module">
+    // Import Firebase SDK modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } 
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // ✅ Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyDb_0mZJYuJOk9Fd8vKtbInFrFSno8uA9E",
+      authDomain: "live-trading-junction.firebaseapp.com",
+      projectId: "live-trading-junction",
+      storageBucket: "live-trading-junction.appspot.com",
+      messagingSenderId: "907137926761",
+      appId: "1:907137926761:web:170dfed07047d1f0eb44f8",
+      measurementId: "G-LFGCEWOZBF"
+    };
+
+    // ✅ Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // ✅ Popup Message Function
+    function showPopupMessage(type, message) {
+      const popup = document.createElement("div");
+      popup.style.position = "fixed";
+      popup.style.top = "25px";
+      popup.style.left = "50%";
+      popup.style.transform = "translateX(-50%)";
+      popup.style.background = type === "error" ? "#ef4444" : "#16a34a";
+      popup.style.color = "white";
+      popup.style.padding = "12px 24px";
+      popup.style.borderRadius = "8px";
+      popup.style.fontWeight = "600";
+      popup.style.boxShadow = "0 4px 15px rgba(0,0,0,0.3)";
+      popup.style.zIndex = "9999";
+      popup.style.transition = "opacity 0.3s ease";
+      popup.textContent = message;
+      document.body.appendChild(popup);
+      setTimeout(() => (popup.style.opacity = "0"), 2500);
+      setTimeout(() => popup.remove(), 3000);
+    }
+
+    // ✅ Google Login
+    window.googleLogin = () => {
+      signInWithPopup(auth, provider)
+        .then(() => showPopupMessage("success", "Login Successful! Redirecting..."))
+        .catch((err) => showPopupMessage("error", err.message));
+    };
+
+    // ✅ Email Login
+    window.emailLogin = () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => showPopupMessage("success", "Login Successful! Redirecting..."))
+        .catch((err) => showPopupMessage("error", err.message));
+    };
+
+    // ✅ Sign Up
+    window.emailSignup = () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => showPopupMessage("success", "Account Created! You can now login."))
+        .catch((err) => showPopupMessage("error", err.message));
+    };
   </script>
 
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: #0f172a;
+      margin: 0;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
       color: white;
-      margin: 0;
-      overflow-x: hidden;
-    }
-
-    /* 🔝 Navbar */
-    .topBar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(17, 24, 39, 0.85);
-      backdrop-filter: blur(8px);
-      text-align: center;
-      padding: 14px 0;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      z-index: 9999;
-    }
-
-    .topBar h1 {
-      font-size: 22px;
-      margin: 0;
-      color: #38bdf8;
-    }
-
-    /* 🔐 Auth Buttons */
-    .authButtons {
-      margin-top: 10px;
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    h2 {
+      text-align: center;
+      color: #38bdf8;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .auth-container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      width: 320px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    input {
+      width: 90%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      font-size: 14px;
     }
 
     button {
-      background: linear-gradient(90deg, #2563eb, #1d4ed8);
+      margin-top: 10px;
+      background: linear-gradient(90deg, #3b82f6, #2563eb);
       border: none;
       color: white;
-      padding: 8px 18px;
+      padding: 12px 20px;
       border-radius: 8px;
-      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s;
+      font-weight: 600;
+      transition: transform 0.2s ease;
     }
 
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(90deg, #1e40af, #3b82f6);
-    }
+    button:hover { transform: scale(1.05); }
 
-    #authStatus {
-      text-align: center;
-      font-weight: bold;
-      color: #4ade80;
-      margin-top: 100px;
-    }
-
-    /* ✉️ Email Form */
-    .emailForm {
-      display: none;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 400px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(255,255,255,0.1);
-    }
-
-    .emailForm input {
-      width: 90%;
-      padding: 10px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-    }
-
-    .emailForm button {
-      width: 92%;
-      margin-top: 10px;
-    }
-
-    /* Content Area */
-    .mainContent {
-      margin-top: 160px;
-      text-align: center;
+    .google-btn {
+      background: #db4437;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 
 <body>
-  <div class="topBar">
-    <h1>Trading Journal</h1>
-    <div class="authButtons">
-      <button id="googleSignInBtn">Sign In with Google</button>
-      <button id="emailToggleBtn">Email Login</button>
-      <button id="signOutBtn" style="display:none;">Sign Out</button>
-    </div>
+  <h2>Trading Journal</h2>
+  <div class="auth-container">
+    <button class="google-btn" onclick="googleLogin()">Sign In with Google</button>
+
+    <input type="email" id="email" placeholder="Enter Email" />
+    <input type="password" id="password" placeholder="Enter Password" />
+
+    <button onclick="emailLogin()">Login</button>
+    <button onclick="emailSignup()">Sign Up</button>
   </div>
 
-  <div id="authStatus">Checking authentication...</div>
-
-  <!-- ✉️ Email Login / Signup Form -->
-  <div class="emailForm" id="emailForm">
-    <input type="email" id="email" placeholder="Enter Email" required />
-    <input type="password" id="password" placeholder="Enter Password" required />
-    <button id="loginBtn">Login</button>
-    <button id="signupBtn">Sign Up</button>
-  </div>
-
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -6029,125 +6051,5 @@ window.onload = () => {
 </script>
 </body>
 </html>
-  <div class="mainContent" id="journalContent" style="display:none;">
-    <h2>Welcome to your Trading Journal 📊</h2>
-    <p>Track your Nifty, Banknifty, Gold & BTC trades securely!</p>
-  </div>
-
-  <!-- ✅ Firebase Authentication -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut,
-             createUserWithEmailAndPassword, signInWithEmailAndPassword }
-      from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-    // 🔧 Firebase Config
-    const firebaseConfig = {
-      apiKey: "AIzaSyDb_OmZJYuJ0kgFd8vKtbInFFrSno8uA9E",
-      authDomain: "live-trading-junction.firebaseapp.com",
-      projectId: "live-trading-junction",
-      storageBucket: "live-trading-junction.appspot.com",
-      messagingSenderId: "907137926761",
-      appId: "1:907137926761:web:170dfed07047d1f0eb44f8"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-
-    const googleSignInBtn = document.getElementById("googleSignInBtn");
-    const emailToggleBtn = document.getElementById("emailToggleBtn");
-    const signOutBtn = document.getElementById("signOutBtn");
-    const authStatus = document.getElementById("authStatus");
-    const journalContent = document.getElementById("journalContent");
-    const emailForm = document.getElementById("emailForm");
-
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const loginBtn = document.getElementById("loginBtn");
-    const signupBtn = document.getElementById("signupBtn");
-
-    // 🔄 Google Sign In
-    googleSignInBtn.addEventListener("click", () => {
-      signInWithPopup(auth, provider)
-        .then(result => {
-          const user = result.user;
-          authStatus.innerText = `✅ Logged in as ${user.displayName}`;
-          showDashboard();
-        })
-        .catch(err => {
-          console.error(err.message);
-          authStatus.innerText = "❌ Google Sign-In failed!";
-        });
-    });
-
-    // ✉️ Toggle Email Form
-    emailToggleBtn.addEventListener("click", () => {
-      emailForm.style.display = emailForm.style.display === "none" ? "block" : "none";
-    });
-
-    // ✉️ Email Login
-    loginBtn.addEventListener("click", () => {
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          authStatus.innerText = `✅ Logged in as ${email}`;
-          showDashboard();
-        })
-        .catch(err => {
-          authStatus.innerText = `❌ ${err.message}`;
-        });
-    });
-
-    // ✉️ Email Signup
-    signupBtn.addEventListener("click", () => {
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          authStatus.innerText = `🎉 Account created successfully for ${email}`;
-          showDashboard();
-        })
-        .catch(err => {
-          authStatus.innerText = `❌ ${err.message}`;
-        });
-    });
-
-    // 🚪 Sign Out
-    signOutBtn.addEventListener("click", () => {
-      signOut(auth).then(() => {
-        authStatus.innerText = "👋 Signed out successfully.";
-        resetUI();
-      });
-    });
-
-    // 🧠 Monitor Auth State
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        authStatus.innerText = `✅ Logged in as ${user.email || user.displayName}`;
-        showDashboard();
-      } else {
-        authStatus.innerText = "⚠️ Please login to access your Journal.";
-        resetUI();
-      }
-    });
-
-    function showDashboard() {
-      googleSignInBtn.style.display = "none";
-      emailToggleBtn.style.display = "none";
-      emailForm.style.display = "none";
-      signOutBtn.style.display = "inline-block";
-      journalContent.style.display = "block";
-    }
-
-    function resetUI() {
-      googleSignInBtn.style.display = "inline-block";
-      emailToggleBtn.style.display = "inline-block";
-      signOutBtn.style.display = "none";
-      emailForm.style.display = "none";
-      journalContent.style.display = "none";
-    }
-  </script>
 </body>
 </html>
