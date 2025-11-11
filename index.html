@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trading Journal</title>
 
-  <!-- ✅ SEO & Performance -->
-  <meta name="description" content="Trading Journal — Real-time tracker for Nifty, Banknifty, BTC & Gold with Firebase login integration." />
+  <!-- ✅ SEO & Analytics -->
+  <meta name="description" content="Trading Journal — Login securely via Google or Email to access your Live Trading Dashboard." />
   <meta name="author" content="LiveTradingJunction-Cyber" />
   <link rel="icon" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
 
@@ -28,12 +28,12 @@
       overflow-x: hidden;
     }
 
-    /* 🔝 Top Navbar */
+    /* 🔝 Navbar */
     .topBar {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(17, 24, 39, 0.8);
+      background: rgba(17, 24, 39, 0.85);
       backdrop-filter: blur(8px);
       text-align: center;
       padding: 14px 0;
@@ -53,9 +53,10 @@
       display: flex;
       justify-content: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .authButtons button {
+    button {
       background: linear-gradient(90deg, #2563eb, #1d4ed8);
       border: none;
       color: white;
@@ -66,7 +67,7 @@
       transition: transform 0.2s;
     }
 
-    .authButtons button:hover {
+    button:hover {
       transform: scale(1.05);
       background: linear-gradient(90deg, #1e40af, #3b82f6);
     }
@@ -75,28 +76,63 @@
       text-align: center;
       font-weight: bold;
       color: #4ade80;
-      margin-top: 80px;
+      margin-top: 100px;
     }
 
-    /* Body container placeholder */
+    /* ✉️ Email Form */
+    .emailForm {
+      display: none;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    .emailForm input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .emailForm button {
+      width: 92%;
+      margin-top: 10px;
+    }
+
+    /* Content Area */
     .mainContent {
-      margin-top: 130px;
+      margin-top: 160px;
       text-align: center;
     }
   </style>
 </head>
 
 <body>
-  <!-- 🔝 Navbar -->
   <div class="topBar">
     <h1>Trading Journal</h1>
     <div class="authButtons">
-      <button id="signInBtn">Sign In</button>
+      <button id="googleSignInBtn">Sign In with Google</button>
+      <button id="emailToggleBtn">Email Login</button>
       <button id="signOutBtn" style="display:none;">Sign Out</button>
     </div>
   </div>
 
-  <p id="authStatus">Checking authentication...</p>
+  <div id="authStatus">Checking authentication...</div>
+
+  <!-- ✉️ Email Login / Signup Form -->
+  <div class="emailForm" id="emailForm">
+    <input type="email" id="email" placeholder="Enter Email" required />
+    <input type="password" id="password" placeholder="Enter Password" required />
+    <button id="loginBtn">Login</button>
+    <button id="signupBtn">Sign Up</button>
+  </div>
 
  <!DOCTYPE html>
 <html lang="en">
@@ -5994,17 +6030,18 @@ window.onload = () => {
 </body>
 </html>
   <div class="mainContent" id="journalContent" style="display:none;">
-    <h2>Welcome to Live Trading Journal 📈</h2>
-    <p>Your dashboard will appear here after login.</p>
+    <h2>Welcome to your Trading Journal 📊</h2>
+    <p>Track your Nifty, Banknifty, Gold & BTC trades securely!</p>
   </div>
 
   <!-- ✅ Firebase Authentication -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut }
+    import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut,
+             createUserWithEmailAndPassword, signInWithEmailAndPassword }
       from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    // 🔧 Your Firebase Config
+    // 🔧 Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyDb_OmZJYuJ0kgFd8vKtbInFFrSno8uA9E",
       authDomain: "live-trading-junction.firebaseapp.com",
@@ -6014,62 +6051,103 @@ window.onload = () => {
       appId: "1:907137926761:web:170dfed07047d1f0eb44f8"
     };
 
-    // 🚀 Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
-    // 🟢 Elements
-    const signInBtn = document.getElementById("signInBtn");
+    const googleSignInBtn = document.getElementById("googleSignInBtn");
+    const emailToggleBtn = document.getElementById("emailToggleBtn");
     const signOutBtn = document.getElementById("signOutBtn");
     const authStatus = document.getElementById("authStatus");
     const journalContent = document.getElementById("journalContent");
+    const emailForm = document.getElementById("emailForm");
 
-    // 🟢 Google Sign-in
-    signInBtn.addEventListener("click", () => {
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+
+    // 🔄 Google Sign In
+    googleSignInBtn.addEventListener("click", () => {
       signInWithPopup(auth, provider)
         .then(result => {
           const user = result.user;
           authStatus.innerText = `✅ Logged in as ${user.displayName}`;
-          signInBtn.style.display = "none";
-          signOutBtn.style.display = "inline-block";
-          journalContent.style.display = "block";
+          showDashboard();
         })
-        .catch(error => {
-          console.error(error.message);
-          authStatus.innerText = "❌ Login failed!";
+        .catch(err => {
+          console.error(err.message);
+          authStatus.innerText = "❌ Google Sign-In failed!";
         });
     });
 
-    // 🔴 Sign-out
-    signOutBtn.addEventListener("click", () => {
-      signOut(auth)
+    // ✉️ Toggle Email Form
+    emailToggleBtn.addEventListener("click", () => {
+      emailForm.style.display = emailForm.style.display === "none" ? "block" : "none";
+    });
+
+    // ✉️ Email Login
+    loginBtn.addEventListener("click", () => {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          authStatus.innerText = "👋 Signed out successfully.";
-          signInBtn.style.display = "inline-block";
-          signOutBtn.style.display = "none";
-          journalContent.style.display = "none";
+          authStatus.innerText = `✅ Logged in as ${email}`;
+          showDashboard();
         })
-        .catch(error => {
-          console.error(error.message);
-          authStatus.innerText = "❌ Error signing out!";
+        .catch(err => {
+          authStatus.innerText = `❌ ${err.message}`;
         });
     });
 
-    // 🔄 Monitor Auth State
+    // ✉️ Email Signup
+    signupBtn.addEventListener("click", () => {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          authStatus.innerText = `🎉 Account created successfully for ${email}`;
+          showDashboard();
+        })
+        .catch(err => {
+          authStatus.innerText = `❌ ${err.message}`;
+        });
+    });
+
+    // 🚪 Sign Out
+    signOutBtn.addEventListener("click", () => {
+      signOut(auth).then(() => {
+        authStatus.innerText = "👋 Signed out successfully.";
+        resetUI();
+      });
+    });
+
+    // 🧠 Monitor Auth State
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        authStatus.innerText = `✅ Logged in as ${user.displayName || user.email}`;
-        signInBtn.style.display = "none";
-        signOutBtn.style.display = "inline-block";
-        journalContent.style.display = "block";
+        authStatus.innerText = `✅ Logged in as ${user.email || user.displayName}`;
+        showDashboard();
       } else {
-        authStatus.innerText = "⚠️ Please sign in to access the Journal.";
-        signInBtn.style.display = "inline-block";
-        signOutBtn.style.display = "none";
-        journalContent.style.display = "none";
+        authStatus.innerText = "⚠️ Please login to access your Journal.";
+        resetUI();
       }
     });
+
+    function showDashboard() {
+      googleSignInBtn.style.display = "none";
+      emailToggleBtn.style.display = "none";
+      emailForm.style.display = "none";
+      signOutBtn.style.display = "inline-block";
+      journalContent.style.display = "block";
+    }
+
+    function resetUI() {
+      googleSignInBtn.style.display = "inline-block";
+      emailToggleBtn.style.display = "inline-block";
+      signOutBtn.style.display = "none";
+      emailForm.style.display = "none";
+      journalContent.style.display = "none";
+    }
   </script>
 </body>
 </html>
