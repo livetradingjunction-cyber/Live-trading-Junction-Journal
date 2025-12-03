@@ -1,159 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trading Journal</title>
-
-  <!-- ✅ Favicon -->
-  <link rel="icon" type="image/png" href="https://livetradingjunction-cyber.github.io/Live-trading-Junction-Journal/favicon.ico" />
-  <meta name="theme-color" content="#0f172a" />
-
-  <!-- ✅ Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
-
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(145deg, #0f172a, #1e293b);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .login-box {
-      background: rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 40px 50px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      backdrop-filter: blur(8px);
-      text-align: center;
-    }
-
-    h2 { margin-bottom: 10px; color: #38bdf8; }
-    input {
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      text-align: center;
-    }
-    button {
-      margin: 6px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover { background: #1d4ed8; }
-
-    .toast {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ef4444;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 9999;
-    }
-    .toast.show { opacity: 1; }
-  </style>
-</head>
-<body>
-
-  <div class="login-box">
-    <h2>Trading Journal</h2>
-    <button id="googleSignIn">Sign In with Google</button>
-    <hr style="margin:15px 0;border:1px solid rgba(255,255,255,0.2)">
-    <input type="email" id="email" placeholder="Enter Email" />
-    <input type="password" id="password" placeholder="Enter Password" />
-    <div>
-      <button id="loginBtn">Login</button>
-      <button id="signupBtn">Sign Up</button>
-    </div>
-  </div>
-
-  <div id="toast" class="toast"></div>
-
-  <script>
-    // ✅ Firebase Configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDb_OmZJYujOk9Fd8vKtbInFFrSno8uA9E",
-      authDomain: "live-trading-junction.firebaseapp.com",
-      projectId: "live-trading-junction",
-      storageBucket: "live-trading-junction.appspot.com",
-      messagingSenderId: "907137926761",
-      appId: "1:907137926761:web:170dfed07047d1f0eb44f8",
-      measurementId: "G-LFGCEWOZ8F"
-    };
-
-    // 🔥 Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    // ✅ Toast Notification
-    function showToast(msg, color="#ef4444") {
-      const toast = document.getElementById("toast");
-      toast.textContent = msg;
-      toast.style.background = color;
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 3000);
-    }
-
-    // ✅ Google Sign-In
-    document.getElementById("googleSignIn").addEventListener("click", () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider)
-        .then(res => {
-          showToast(`Welcome ${res.user.displayName}`, "#22c55e");
-          setTimeout(() => window.location.href = "index.html", 1500);
-        })
-        .catch(err => showToast("Firebase Error: " + err.message));
-    });
-
-    // ✅ Email/Password Signup
-    document.getElementById("signupBtn").addEventListener("click", () => {
-      const email = document.getElementById("email").value;
-      const pass = document.getElementById("password").value;
-      auth.createUserWithEmailAndPassword(email, pass)
-        .then(() => showToast("Signup Successful ✅", "#22c55e"))
-        .catch(err => showToast("Error: " + err.message));
-    });
-
-    // ✅ Email/Password Login
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      const email = document.getElementById("email").value;
-      const pass = document.getElementById("password").value;
-      auth.signInWithEmailAndPassword(email, pass)
-        .then(() => {
-          showToast("Login Successful ✅", "#22c55e");
-          setTimeout(() => window.location.href = "index.html", 1500);
-        })
-        .catch(err => showToast("Error: " + err.message));
-    });
-  </script>
-
-  <!DOCTYPE html>
-<html lang="en">
-<head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Trading Journal</title>
+<title>Live Trading Junction Journal</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <!-- Added: React and Babel for Range Calculator -->
 <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
@@ -524,7 +374,7 @@
 }
 /* Checked states enhanced with brighter gradients */
 #weeklyArea .radio-group input[type="radio"]:checked + label {
-  background: linear-gradient(135deg, #6366f1, #F67280);
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
   color: white;
   border-color: #6366f1;
   transform: scale(1.05);
@@ -696,7 +546,7 @@ body {
   color:#fff; font-size:48px; font-weight:900; margin:0; text-shadow:2px 2px 4px rgba(0,0,0,0.3);
   display:flex; align-items:center; justify-content:center; gap:10px;
   padding: 15px 30px;
-  background: linear-gradient(135deg, #F67280, #7c3aed);
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
   border-radius: 50px;
   border: 2px solid rgba(255,255,255,0.3);
   box-shadow: 0 8px 25px rgba(79,70,229,0.4);
@@ -1191,7 +1041,7 @@ tbody tr:hover td { background:var(--input-bg); }
   transition: all 0.2s;
 }
 #searchFilterModal button:hover {
-  background: #F67280;
+  background: #4f46e5;
   transform: translateY(-1px);
 }
 #searchFilterModal #filteredTrades {
@@ -1279,7 +1129,7 @@ tbody tr:hover td { background:var(--input-bg); }
   transition: all 0.2s;
 }
 #riskCalculatorModal button:hover {
-  background: #F67280;
+  background: #4f46e5;
   transform: translateY(-1px);
 }
 #riskCalculatorModal #riskResult {
@@ -1388,7 +1238,7 @@ tbody tr:hover td { background:var(--input-bg); }
   transition: all 0.2s;
 }
 #mistakesModal button:hover {
-  background: #F67280;
+  background: #4f46e5;
   transform: translateY(-1px);
 }
 /* Updated: Style for form title like a button */
@@ -2146,7 +1996,7 @@ tbody tr:hover td { background:var(--input-bg); }
 <div class="container" id="journalArea">
   <!-- TITLE BAR -->
   <div class="title-bar">
-    <h1>Trading Journal</h1>
+    <h1>Live Trading Junction Journal</h1>
   </div>
   <!-- Present Capital Button -->
   <div style="text-align: center; margin: 20px 0;">
@@ -3181,7 +3031,7 @@ tbody tr:hover td { background:var(--input-bg); }
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Day Range</th>
+                                    <th>Yesterday Range</th>
                                     <th>Level 1</th>
                                     <th>Level 2</th>
                                     <th>Level 3</th>
@@ -3260,13 +3110,121 @@ tbody tr:hover td { background:var(--input-bg); }
                             </thead>
                             <tbody id="resultBody3"></tbody>
                         </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>        <!-- ==================== 4వ కాలిక్యులేటర్ – Day Range Calculator (పూర్తి) ==================== -->
+        <div class="section">
+            <h2 class="text-2xl font-bold text-center mb-6 text-purple-700"></h2>
+            <div class="script4 container mx-auto p-8 bg-white rounded-2xl shadow-2xl">
+
+                <div class="title-header">Day Range Calculator</div>
+
+                <div class="input-section">
+                    <label class="input-label" for="dayRange4">Yesterday Range</label>
+                    <input type="number" id="dayRange4" class="input-field" placeholder="Enter value (e.g., 187624)">
+                </div>
+
+                <div class="button-section">
+                    <button class="btn-calculate" onclick="calculate4()">Calculate</button>
+                </div>
+
+                <div class="results" id="results4">
+                    <h2 class="results-title">Calculation Results</h2>
+
+                    <div class="result-grid">
+                        <div class="result-card"><div class="result-label">Input Value</div><div class="result-value" id="inputValue4">-</div></div>
+                        <div class="result-card"><div class="result-label">Yesterday Range</div><div class="result-value purple" id="first4Digits4">-</div></div>
+                        <div class="result-card"><div class="result-label">Step 1</div><div class="result-value green" id="step1_4">-</div></div>
+                        <div class="result-card"><div class="result-label">Step 2</div><div class="result-value blue" id="step2_4">-</div></div>
+                    </div>
+
+                    <div class="final-grid">
+                        <div class="final-card first"><div class="final-label">FIRST FINAL</div><div class="final-value" id="firstFinal4">-</div></div>
+                        <div class="final-card second"><div class="final-label">SECOND FINAL</div><div class="final-value" id="secondFinal4">-</div></div>
+                        <div class="final-card third"><div class="final-label">THIRD FINAL</div><div class="final-value" id="thirdFinal4">-</div></div>
+                        <div class="final-card fourth"><div class="final-label">FOURTH FINAL</div><div class="final-value" id="fourthFinal4">-</div></div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <style>
+        /* ---------- 4వ కాలిక్యులేటర్ పూర్తి CSS ---------- */
+        .script4 .title-header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:24px 30px;border-radius:16px;font-size:28px;font-weight:700;text-align:center;margin-bottom:32px;box-shadow:0 10px 30px rgba(102,126,234,0.4);}
+        .script4 .input-section{margin-bottom:28px;text-align:center;}
+        .script4 .input-label{display:block;font-size:20px;font-weight:700;margin-bottom:12px;background:linear-gradient(135deg,#10b981 0%,#059669 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .script4 .input-field{width:100%;max-width:450px;padding:18px;border:2px solid #e0e0e0;border-radius:12px;font-size:20px;text-align:center;transition:all .3s;}
+        .script4 .input-field:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 4px rgba(102,126,234,0.1);}
+        .script4 .button-section{display:flex;justify-content:center;margin-bottom:32px;}
+        .script4 .btn-calculate{padding:18px 64px;border:none;border-radius:12px;font-size:18px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;transition:all .3s;}
+        .script4 .btn-calculate:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(102,126,234,0.4);}
+        .script4 .results{background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);border-radius:16px;padding:28px;margin-top:32px;display:none;}
+        .script4 .results.show{display:block;animation:slideIn .5s ease;}
+        @keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        .script4 .results-title{color:#333;font-size:24px;font-weight:700;margin-bottom:24px;text-align:center;}
+        .script4 .result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px;}
+        .script4 .result-card{background:white;padding:20px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.1);text-align:center;}
+        .script4 .result-label{color:#666;font-size:13px;font-weight:600;margin-bottom:8px;}
+        .script4 .result-value{color:#333;font-size:26px;font-weight:700;}
+        .script4 .result-value.purple{color:#667eea;}
+        .script4 .result-value.green{color:#10b981;}
+        .script4 .result-value.blue{color:#3b82f6;}
+        .script4 .final-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px;}
+        .script4 .final-card{padding:28px;border-radius:12px;color:white;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+        .script4 .final-card.first{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);}
+        .script4 .final-card.second{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);}
+        .script4 .final-card.third{background:linear-gradient(135deg,#11998e 0%,#38ef7d 100%);}
+        .script4 .final-card.fourth{background:linear-gradient(135deg,#fa709a 0%,#fee140 100%);}
+        .script4 .final-label{font-size:13px;opacity:.95;font-weight:600;margin-bottom:8px;}
+        .script4 .final-value{font-size:38px;font-weight:700;}
+        @media(max-width:600px){.script4 .result-grid,.script4 .final-grid{grid-template-columns:1fr;}}
+        </style>
+
+        <script>
+        // ---------- 4వ కాలిక్యులేటర్ పూర్తి JS ----------
+        function calculate4() {
+            const input = document.getElementById('dayRange4').value;
+            const inputValue = parseFloat(input);
+
+            if (!input || isNaN(inputValue) || inputValue <= 0) {
+                alert('Please enter a valid positive number');
+                return;
+            }
+
+            const rangeStr = Math.floor(inputValue).toString();
+            const first4Digits = parseInt(rangeStr.substring(0, 4));
+
+            const step1 = inputValue / 287;
+            const step2 = first4Digits - step1;
+            const firstFinalValue  = step2 / 2;
+            const secondFinalValue = firstFinalValue / 2;
+            const thirdFinalValue  = secondFinalValue / 2;
+            const fourthFinalValue = thirdFinalValue / 2;
+
+            document.getElementById('inputValue4').textContent   = inputValue.toFixed(2);
+            document.getElementById('first4Digits4').textContent = first4Digits;
+            document.getElementById('step1_4').textContent       = step1.toFixed(2);
+            document.getElementById('step2_4').textContent       = step2.toFixed(2);
+            document.getElementById('firstFinal4').textContent   = firstFinalValue.toFixed(2);
+            document.getElementById('secondFinal4').textContent  = secondFinalValue.toFixed(2);
+            document.getElementById('thirdFinal4').textContent   = thirdFinalValue.toFixed(2);
+            document.getElementById('fourthFinal4').textContent  = fourthFinalValue.toFixed(2);
+
+            document.getElementById('results4').classList.add('show');
+        }
+
+        // Enter key support
+        document.getElementById('dayRange4')?.addEventListener('keypress', e => {
+            if (e.key === 'Enter') calculate4();
+        });
+        </script>
+        <!-- ==================== 4వ కాలిక్యులేటర్ ముగిసింది ==================== -->
     </div>
   </div>
 </div>
+       
 <!-- New: Nifty Setup Modal -->
 <div id="niftySetupModal">
   <div>
@@ -3836,7 +3794,7 @@ ${csv}
 \`\`\`
 If email doesn't open, use the "Download Excel" button instead.
 Best,
-Trading Journal`;
+Live Trading Junction Journal`;
   const encodedSubject = encodeURIComponent(subject);
   const encodedBody = encodeURIComponent(body);
   const mailtoLink = `mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`;
@@ -6041,8 +5999,5 @@ window.onload = () => {
   }
 };
 </script>
-</body>
-</html>
-
 </body>
 </html>
