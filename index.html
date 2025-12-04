@@ -3222,6 +3222,121 @@ tbody tr:hover td { background:var(--input-bg); }
         </script>
         <!-- ==================== 4వ కాలిక్యులేటర్ ముగిసింది ==================== -->
     </div>
+            <!-- ==================== 5th Calculator – BTC Yesterday Range Calculator ==================== -->
+        <div class="section">
+            <h2 class="text-2xl font-bold text-center mb-6 text-purple-700"></h2>
+            <div class="container mx-auto p-8 bg-white rounded-3xl shadow-2xl border-4 border-gradient-to-r from-purple-600 to-pink-600">
+                <h1 class="text-center mb-10 text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    BTC Yesterday Range Calculator
+                </h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Yesterday High -->
+                    <div class="text-center">
+                        <label class="block mb-4 text-xl font-bold bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-2xl shadow-lg">
+                            Yesterday High
+                        </label>
+                        <input
+                            type="number"
+                            id="yesterday-high-5"
+                            placeholder="e.g. 68250.50"
+                            step="0.01"
+                            class="w-full px-8 py-6 text-2xl font-bold text-center border-4 border-purple-500 rounded-2xl focus:border-pink-500 focus:ring-4 focus:ring-pink-300 transition-all shadow-inner"
+                        >
+                    </div>
+
+                    <!-- Yesterday Low -->
+                    <div class="text-center">
+                        <label class="block mb-4 text-xl font-bold bg-gradient-to-r from-rose-500 to-orange-600 text-white px-8 py-4 rounded-2xl shadow-lg">
+                            Yesterday Low
+                        </label>
+                        <input
+                            type="number"
+                            id="yesterday-low-5"
+                            placeholder="e.g. 66500.00"
+                            step="0.01"
+                            class="w-full px-8 py-6 text-2xl font-bold text-center border-4 border-purple-500 rounded-2xl focus:border-pink-500 focus:ring-4 focus:ring-pink-300 transition-all shadow-inner"
+                        >
+                    </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <div class="text-center mt-10">
+                    <button onclick="calculateRange5()" class="px-16 py-6 text-2xl font-extrabold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-2xl hover:shadow-pink-500/50 transform hover:scale-105 transition-all duration-300">
+                        Calculate Range
+                    </button>
+                </div>
+
+                <!-- Result Box -->
+                <div id="result-container-5" class="result-container mt-12 mx-auto max-w-2xl text-center opacity-0 transition-opacity duration-700">
+                    <div class="text-2xl font-bold text-white mb-4 opacity-80">Yesterday Range</div>
+                    <div id="range-value-5" class="text-7xl font-extrabold text-white mb-6 drop-shadow-2xl">0</div>
+                    <div id="result-detail-5" class="bg-white/20 backdrop-blur-lg rounded-2xl p-8 text-xl font-bold text-white shadow-inner"></div>
+                </div>
+
+                <div class="text-center mt-10 text-gray-600 font-semibold">
+                    Formula: Yesterday High − Yesterday Low = Range
+                </div>
+            </div>
+        </div>
+
+        <style>
+            /* 5th Calculator Exclusive Styles */
+            #result-container-5 {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 30px;
+                padding: 40px;
+                box-shadow: 0 20px 60px rgba(102, 126, 234, 0.5);
+            }
+            #result-container-5.show {
+                opacity: 1;
+            }
+            #range-value-5 {
+                font-family: 'Courier New', monospace;
+                letter-spacing: 4px;
+            }
+        </style>
+
+        <script>
+            // ==================== 5th Calculator JavaScript ====================
+            function calculateRange5() {
+                const high = parseFloat(document.getElementById('yesterday-high-5').value);
+                const low = parseFloat(document.getElementById('yesterday-low-5').value);
+                const resultContainer = document.getElementById('result-container-5');
+
+                if (isNaN(high) || isNaN(low)) {
+                    alert('Please enter both High and Low values');
+                    resultContainer.classList.remove('show');
+                    return;
+                }
+
+                if (high < low) {
+                    alert('High value cannot be less than Low value');
+                    resultContainer.classList.remove('show');
+                    return;
+                }
+
+                const range = (high - low).toFixed(2);
+
+                document.getElementById('range-value-5').textContent = range;
+                document.getElementById('result-detail-5').innerHTML = `
+                    <div class="mb-4">High: <span class="text-3xl">${high.toLocaleString()}</span></div>
+                    <div class="mb-4">Low: <span class="text-3xl">${low.toLocaleString()}</span></div>
+                    <div class="text-4xl mt-6">Range = <span class="text-yellow-300">${range}</span></div>
+                `;
+
+                resultContainer.classList.add('show');
+                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            // Enter key support
+            ['yesterday-high-5', 'yesterday-low-5'].forEach(id => {
+                document.getElementById(id)?.addEventListener('keypress', e => {
+                    if (e.key === 'Enter') calculateRange5();
+                });
+            });
+        </script>
+        <!-- ==================== 5th Calculator End ==================== -->
   </div>
 </div>
        
